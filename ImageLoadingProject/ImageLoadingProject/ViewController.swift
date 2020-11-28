@@ -31,19 +31,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? ImageCell else {
-            fatalError("Could not dequeue cell")
-        }
-        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? ImageCell else { fatalError("Could not dequeue cell") }
         switch rows[indexPath.row] {
         case .image(let title, let urlString):
+            guard let url = URL(string: urlString) else { fatalError("No correct URL") }
             cell.title = title
-            cell.imageUrl = URL(string: urlString)
+            cell.imageUrl = url
         case .largeImage(let title, let previewUrlString, _):
+            guard let url = URL(string: previewUrlString) else { fatalError("No correct URL") }
             cell.title = title
-            cell.imageUrl = URL(string: previewUrlString)
+            cell.imageUrl = url
         }
-        
         return cell
     }
 

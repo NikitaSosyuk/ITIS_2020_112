@@ -8,6 +8,17 @@
 import UIKit
 
 class ImageCell: UITableViewCell {
+    
+    @IBOutlet private var customTitleLabel: UILabel!
+    @IBOutlet private var customImageView: UIImageView!
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        imageView?.image = nil
+        dataTask?.cancel()
+    }
+    
     var imageUrl: URL? {
         didSet {
             loadImage()
@@ -19,9 +30,6 @@ class ImageCell: UITableViewCell {
             customTitleLabel.text = title
         }
     }
-
-    @IBOutlet private var customTitleLabel: UILabel!
-    @IBOutlet private var customImageView: UIImageView!
 
     private var dataTask: URLSessionDataTask?
 
@@ -36,12 +44,5 @@ class ImageCell: UITableViewCell {
             }
         }
         dataTask?.resume()
-    }
-
-    override func prepareForReuse() {
-        super.prepareForReuse()
-
-        imageView?.image = nil
-        dataTask?.cancel()
     }
 }

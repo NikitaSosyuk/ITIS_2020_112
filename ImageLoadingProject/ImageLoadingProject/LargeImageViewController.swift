@@ -22,10 +22,7 @@ class LargeImageViewController: UIViewController, URLSessionDownloadDelegate {
     }
     
     public func loadImage() {
-        guard let url = urlString else {
-            return
-        }
-        
+        guard let url = urlString else { return }
         let urlSession = URLSession(configuration: .default, delegate: self, delegateQueue: OperationQueue())
         let downloadTask = urlSession.downloadTask(with: url)
         downloadTask.resume()
@@ -41,7 +38,7 @@ class LargeImageViewController: UIViewController, URLSessionDownloadDelegate {
     }
     
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
-        let progress = Float(totalBytesWritten / totalBytesExpectedToWrite)
+        let progress = Float(totalBytesWritten) / Float(totalBytesExpectedToWrite)
         DispatchQueue.main.async { [weak self] in
             self?.progressView.setProgress(progress, animated: true)
         }
