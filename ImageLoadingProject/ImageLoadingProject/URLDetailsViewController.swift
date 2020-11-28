@@ -13,7 +13,7 @@ class URLDetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         loadURL()
     }
 

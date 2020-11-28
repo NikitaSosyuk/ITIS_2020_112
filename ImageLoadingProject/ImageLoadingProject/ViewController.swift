@@ -8,7 +8,7 @@
 import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
+
     enum Row {
         case image(title: String, urlString: String)
         case largeImage(title: String, previewUrlString: String, urlString: String)
